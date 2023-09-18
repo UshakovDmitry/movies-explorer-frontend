@@ -18,7 +18,7 @@
 - Проект сделан на JavaScript-библиотеке React.
 - Для реализации проекта был сделан выбор в пользу функциональных компонентов.
 
-[Ссылка на макет](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=891-3857&mode=design&t=bE6YIbt2uTs0dYnZ-0)
+[Ссылка на макет](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=1-9662&mode=design&t=ZzsIaSDXXvQz7XIA-0)
 
 [Ссылка на репозиторий с back-end'ом проекта](https://github.com/UshakovDmitry/movies-explorer-api)
 
