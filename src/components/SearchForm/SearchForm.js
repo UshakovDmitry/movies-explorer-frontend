@@ -19,7 +19,7 @@ const SearchForm = () => {
 
   return (
   <section className="searchform">
-    <div className="searchform__input-wrapper">
+    <form className="searchform__input-wrapper">
       <Field
         placeholder="Фильм"
         inputStyle="searchform__input"
@@ -36,8 +36,8 @@ const SearchForm = () => {
       >
         Поиск
       </button>
-    </div>
-    <div className="searchform__error">{errorText}</div>
+    </form>
+    <span className="searchform__error">{errorText}</span>
     <FilterCheckbox />
   </section>
 );

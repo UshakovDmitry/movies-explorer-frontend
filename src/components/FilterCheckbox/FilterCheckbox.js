@@ -1,11 +1,11 @@
 import './FilterCheckbox.css';
 
 const FilterCheckbox = () => (
-  <div className="checkbox searchform__checkbox">
+  <label className="checkbox searchform__checkbox">
     <input className="checkbox__button" type="checkbox" id="customCheckbox" />
-    <label className="checkbox__label" htmlFor="customCheckbox"></label>
-    <p className="checkbox__caption">Короткометражки</p>
-  </div>
+    <div className="checkbox__label"></div>
+    <span className="checkbox__caption">Короткометражки</span>
+  </label>
 );
 
 export default FilterCheckbox;
