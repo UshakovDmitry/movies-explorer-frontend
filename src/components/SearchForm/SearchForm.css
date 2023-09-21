@@ -60,11 +60,21 @@
 .searchform__input:focus {
   transition: 0.3s;
   outline: none;
+  border: 1.5px solid #4285f4; 
+  box-shadow: 0 0 5px #4285f4; 
+}
+.searchform__input:hover {
+  transition: 0.3s;
+  outline: none;
+  border: 1.5px solid #4285f4; 
+  box-shadow: 0 0 5px #4285f4; 
 }
 
 .searchform__error {
   margin-top: 10px;
 }
+
+
 
 @media screen and (max-width: 520px) {
   .searchform {
@@ -81,5 +91,6 @@
     font-size: 12px;
     line-height: 1.5;
   }
+  
 }
 

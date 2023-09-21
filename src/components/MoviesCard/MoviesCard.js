@@ -20,18 +20,23 @@ const MoviesCard = ({ name, img, duration, isSaved, isOwner }) => {
         <img className="movie__poster" src={img} alt="Постер к фильму" />
       </div>
       <footer className="movie__footer">
-      {isOwner ? (
-  <img className="movie__btn" src={deleteIcon} alt="Удалить"  />
-) : (
-  isSaved ? (
-    <img className="movie__btn" src={isNotSavedIcon} alt="Сохранить" />
-  ) : (
-    <img className="movie__btn" src={isSavedIcon} alt="Сохранено" />
-  )
-)}
+        {isOwner ? (
+          <button className="movie__btn">
+            <img src={deleteIcon} alt="Удалить" />
+          </button>
+        ) : isSaved ? (
+          <button className="movie__btn">
+            <img src={isNotSavedIcon} alt="Сохранить" />
+          </button>
+        ) : (
+          <button className="movie__btn">
+            <img src={isSavedIcon} alt="Сохранено" />
+          </button>
+        )}
       </footer>
     </li>
   );
 };
+
 
 export default MoviesCard;

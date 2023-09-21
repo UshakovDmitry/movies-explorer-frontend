@@ -1,6 +1,20 @@
 .portfolio {
     padding: 90px 30px 36px;
   }
+
+  .portfolio__link {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    padding: 21px 0;
+  }
+  
+  .portfolio__link:hover .portfolio__arrow {
+    animation: arrow 1.5s infinite ease-in;
+  }
+  
   
   .portfolio__title {
     font-weight: 400;
