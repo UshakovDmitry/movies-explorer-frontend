@@ -48,7 +48,7 @@
 }
 
 .searchform__submit:hover {
-  box-shadow: 0 0 10px 3px #4285f4 inset;
+  box-shadow: 0 0 10px 3px #015cee inset;
 }
 
 .searchform__input::placeholder {
