@@ -23,3 +23,6 @@
 [Ссылка на репозиторий с back-end'ом проекта](https://github.com/UshakovDmitry/movies-explorer-api)
 
 **[Ссылка на проект](https://ushakov.diploma.nomoredomainsicu.ru/)**
+
+**[Ссылка на проект](https://github.com/UshakovDmitry/movies-explorer-frontend/pull/2)**
+
