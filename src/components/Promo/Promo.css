@@ -6,7 +6,9 @@
       'paragraph planet'
       'link .';
     padding: 75px 30px;
-  }
+    background-color: #073042;
+
+}
   
   .promo__title {
     font-weight: 400;

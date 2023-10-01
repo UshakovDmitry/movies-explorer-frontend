@@ -1,46 +1,35 @@
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import Field from '../Field/Field';
-import { useEffect, useState } from 'react';
+import useSearchForm from '../../hooks/useSearchForm';
+import { useCallback, useEffect } from 'react';
 
-const SearchForm = () => {
-  const [value, setValue] = useState('');
-  const [errorText, setErrorText] = useState('');
-
-  const handleChange = (e) => setValue(e.target.value);
+const SearchForm = ({ isOnlyShorts, setIsOnlyShorts, keyWord, setKeyWord }) => {
+  const { value, setValue, isSearchEmpty, handleChange, handleSubmit } = useSearchForm(setKeyWord);
 
   useEffect(() => {
-    if (value !== '') setErrorText('');
-  }, [value]);
+    if (keyWord) setValue(keyWord);
+  }, [keyWord]);
 
-  const handleSubmit = () => {
-    if (value === '') setErrorText('Нужно ввести ключевое слово');
-  };
+  const toggleFilter = useCallback((e) => setIsOnlyShorts(e.target.checked), []);
 
   return (
-  <section className="searchform">
-    <form className="searchform__input-wrapper">
-      <Field
-        placeholder="Фильм"
-        inputStyle="searchform__input"
+    <form className="searchform" onSubmit={handleSubmit}>
+    <div className="searchform__form">
+      <input
+        name="movie"
+        type="text"
         value={value}
         onChange={handleChange}
-        errtext={errorText}
-        errorStyle={''}
+        placeholder="Фильм"
+        className="searchform__input"
       />
-      <button
-        className="searchform__submit"
-        type="button"
-        aria-label="Поиск"
-        onClick={handleSubmit}
-      >
-        Поиск
+      <span className="searchform__error">{isSearchEmpty && 'Введите ключевое слово'}</span>
+      <button className="searchform__submit" type="submit" aria-label="Найти">
+        Найти
       </button>
+      </div>
+      <FilterCheckbox toggler={toggleFilter} value={isOnlyShorts} />
     </form>
-    <span className="searchform__error">{errorText}</span>
-    <FilterCheckbox />
-  </section>
-);
-
+  );
 };
 export default SearchForm;
