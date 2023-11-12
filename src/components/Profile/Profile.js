@@ -1,22 +1,24 @@
 import './Profile.css';
 import Field from '../Field/Field';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/useForm';
-import useErrorShielding from '../../hooks/useErrorShielding';
 
 const Profile = ({ onSubmit, errorMessage, onLogout }) => {
   const currentUser = useContext(CurrentUserContext);
-  const { formik, disabled } = useForm({ name: '', email: '' }, onSubmit);
+  const [isSubmitted, setIsSubmitted] = useState(false); 
+  const { formik, disabled } = useForm({ name: '', email: '' }, onSubmit, () => {
+    setIsSubmitted(true); 
+  });
   const { touched, errors, resetForm } = formik;
-  const { isSubmitted, handleSubmit } = useErrorShielding(formik);
+
 
   useEffect(() => {
     resetForm({ values: { name: currentUser.name, email: currentUser.email } });
-  }, [currentUser]);
+  }, [currentUser, resetForm]);
 
   return (
-    <form className="profile page__element" onSubmit={handleSubmit}>
+    <form className="profile page__element"onSubmit={formik.handleSubmit}>
       <h2 className="profile__title">Привет, {currentUser.name}!</h2>
       <Field
         className={`profile__input${touched.name && errors.name ? ' profile__input_onError' : ''}`}

@@ -20,26 +20,35 @@ const validators = {
   email: Yup.string().email(errorMessages.email).required(errorMessages.required),
   password: Yup.string().min(4, errorMessages.password).required(errorMessages.required),
 };
-const useForm = (inputs, submitHandler) => {
-    const [disabled, setDisabled] = useState(true);
+
+const useForm = (inputs, submitHandler, onSuccess) => {
+  const [disabled, setDisabled] = useState(true);
+
+  const formik = useFormik({
+    initialValues: inputs,
+    validationSchema: Yup.object(
+      Object.keys(inputs).reduce((acc, item) => ({ ...acc, [item]: validators[item] }), {})
+    ),
+    onSubmit: (values) => {
+      setDisabled(true);
+      return submitHandler(values).then((response) => {
+        if (onSuccess) {
+          onSuccess(response); 
+        }
+        return response;
+      });
+    },
+  });
+
+  useEffect(() => {
+    formik.isValid && formik.dirty ? setDisabled(false) : setDisabled(true);
+  }, [formik.dirty, formik.isValid, formik.isValidating]);
+
+  return { formik, disabled };
+};
+
+export default useForm;
+
   
-    const formik = useFormik({
-      initialValues: inputs,
-      validationSchema: Yup.object(
-        Object.keys(inputs).reduce((acc, item) => ({ ...acc, [item]: validators[item] }), {}),
-      ),
-      onSubmit: (values) => {
-        setDisabled(true);
-        return submitHandler(values);
-      },
-    });
-  
-    useEffect(() => {
-      formik.isValid && formik.dirty ? setDisabled(false) : setDisabled(true);
-    }, [formik.dirty, formik.isValid, formik.isValidating]);
-  
-    return { formik, disabled };
-  };
-  
-  export default useForm;
+
   
