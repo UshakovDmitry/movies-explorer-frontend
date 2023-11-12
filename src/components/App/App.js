@@ -84,6 +84,8 @@ const App = () => {
     await MainApi.logout({ _id: currentUser._id });
     setCurrentUser({});
     setLoggedIn(false);
+    // Очищаю LS 
+    localStorage.clear();
     navigate(ROUTE_MAIN);
   }, TOKEN_ERROR_MESSAGE);
 

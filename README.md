@@ -24,5 +24,5 @@
 
 **[Ссылка на проект](https://ushakov.diploma.nomoredomainsicu.ru/)**
 
-**[Ссылка на проект](https://github.com/UshakovDmitry/movies-explorer-frontend/pull/2)**
+**[Ссылка на pullrequest](https://github.com/UshakovDmitry/movies-explorer-frontend/pull/2)**
 
