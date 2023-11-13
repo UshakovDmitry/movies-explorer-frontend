@@ -5,8 +5,16 @@
   flex-direction: column;
   box-sizing: border-box;
   width: 360px;
-  height: 319px;
+  height: 349px;
 
+}
+.movie__link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.movie__link:hover {
+  text-decoration: none;
 }
 
 .movie__header {

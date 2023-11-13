@@ -1,46 +1,35 @@
-import './SearchForm.css';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import Field from '../Field/Field';
-import { useEffect, useState } from 'react';
+  import './SearchForm.css';
+  import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+  import useSearchForm from '../../hooks/useSearchForm';
+  import { useCallback, useEffect } from 'react';
 
-const SearchForm = () => {
-  const [value, setValue] = useState('');
-  const [errorText, setErrorText] = useState('');
+  const SearchForm = ({ isOnlyShorts, setIsOnlyShorts, keyWord, setKeyWord }) => {
+    const { value, setValue, isSearchEmpty, handleChange, handleSubmit } = useSearchForm(setKeyWord);
 
-  const handleChange = (e) => setValue(e.target.value);
+    useEffect(() => {
+      if (keyWord) setValue(keyWord);
+    }, [keyWord]);
 
-  useEffect(() => {
-    if (value !== '') setErrorText('');
-  }, [value]);
+    const toggleFilter = useCallback((e) => setIsOnlyShorts(e.target.checked), []);
 
-  const handleSubmit = () => {
-    if (value === '') setErrorText('Нужно ввести ключевое слово');
+    return (
+      <form className="searchform" onSubmit={handleSubmit}>
+      <div className="searchform__form">
+        <input
+          name="movie"
+          type="text"
+          value={value}
+          onChange={handleChange}
+          placeholder="Фильм"
+          className="searchform__input"
+        />
+        <span className="searchform__error">{isSearchEmpty && 'Введите ключевое слово'}</span>
+        <button className="searchform__submit" type="submit" aria-label="Найти">
+          Найти
+        </button>
+        </div>
+        <FilterCheckbox toggler={toggleFilter} value={isOnlyShorts} />
+      </form>
+    );
   };
-
-  return (
-  <section className="searchform">
-    <form className="searchform__input-wrapper">
-      <Field
-        placeholder="Фильм"
-        inputStyle="searchform__input"
-        value={value}
-        onChange={handleChange}
-        errtext={errorText}
-        errorStyle={''}
-      />
-      <button
-        className="searchform__submit"
-        type="button"
-        aria-label="Поиск"
-        onClick={handleSubmit}
-      >
-        Поиск
-      </button>
-    </form>
-    <span className="searchform__error">{errorText}</span>
-    <FilterCheckbox />
-  </section>
-);
-
-};
-export default SearchForm;
+  export default SearchForm;

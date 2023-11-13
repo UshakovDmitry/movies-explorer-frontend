@@ -1,9 +1,16 @@
 import './Login.css';
 import AuthForm from '../AuthForm/AuthForm';
-import { ROUTE_SIGN_UP } from '../../utils/constants';
+import { ROUTE_SIGN_UP, ROUTE_MAIN } from '../../utils/constants';
 import Field from '../Field/Field';
+import useForm from '../../hooks/useForm';
+import { Navigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onSubmit, errorMessage, loggedIn }) => {
+  const { formik, disabled } = useForm({ email: '', password: '' }, onSubmit);
+  const { touched, errors } = formik;
+
+  if (loggedIn) return <Navigate to={ROUTE_MAIN} />;
+
   return (
     <AuthForm
       title="Рады видеть!"
@@ -11,26 +18,33 @@ const Login = () => {
       captionText="Ещё не зарегистрированы?"
       route={ROUTE_SIGN_UP}
       linkText="Регистрация"
+      disabled={disabled}
+      errorMessage={errorMessage}
+      formik={formik}
     >
       <Field
-        inputStyle="form__input"
-        name="Email"
+        className={`form__input${touched.email && errors.email ? ' form__input_onError' : ''}`}
+        labelStyle="form__label"
+        errorStyle="form__error"
+        name="email"
         type="email"
         label="E-mail"
-        labelStyle="form__label"
-        value="yandex@ya.ru"
-        errorStyle="form__error"
-        required={true}
+        formik={formik}
+        placeholder="Введите е-mail"
+        autoComplete="email"
       />
       <Field
-        inputStyle="form__input"
+        className={`form__input${
+          touched.password && errors.password ? ' form__input_onError' : ''
+        }`}
+        labelStyle="form__label"
+        errorStyle="form__error"
         name="password"
         type="password"
         label="Пароль"
-        labelStyle="form__label"
-        value="practicum12345678"
-        errorStyle="form__error"
-        required={true}
+        formik={formik}
+        placeholder="Введите пароль"
+        autoComplete="current-password"
       />
     </AuthForm>
   );
