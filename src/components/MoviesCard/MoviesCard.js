@@ -3,8 +3,13 @@ import isSavedIcon from "../../images/isSaved.svg";
 import isNotSavedIcon from "../../images/isNotSavedIcon.svg";
 import deleteIcon from "../../images/deletefilm.svg";
 import { parseDuration } from "../../utils/helpers";
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useContext } from 'react';
+
 
 const MoviesCard = ({ data, handleLikeMovie, isSaved }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const isLiked = isSaved ? false : data.owners.includes(currentUser._id);
   const handleClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -57,15 +62,15 @@ const MoviesCard = ({ data, handleLikeMovie, isSaved }) => {
         <footer className="movie__footer">
           {isSaved ? (
             <button className="movie__btn">
-              <img src={deleteIcon} alt="Удалить" onClick={handleClick}/>
+              <img src={deleteIcon} alt="Удалить" onClick={handleClick} />
             </button>
-          ) : isSaved ? (
+          ) : isLiked ? (
             <button className="movie__btn">
-              <img src={isNotSavedIcon} alt="Сохранить" onClick={handleClick}/>
+              <img src={isSavedIcon} alt="Сохранено" onClick={handleClick} />
             </button>
           ) : (
             <button className="movie__btn">
-              <img src={isSavedIcon} alt="Сохранено" onClick={handleClick}/>
+              <img src={isNotSavedIcon} alt="Сохранить" onClick={handleClick} />
             </button>
           )}
         </footer>
